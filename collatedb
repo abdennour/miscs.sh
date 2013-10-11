@@ -1,7 +1,8 @@
 #!/bin/sh
 #Copyright ABDENNOUR TOUMI 2013
-#  Add new line at top of file 
-# *****************************************************************
+#   change all tables and fields   collation in MYSQL
+#  collatedb.sh root 0000 mydb utf8_unicode_ci
+#********************************************************
 #This program is free software: you can redistribute it and/or modify
 #it under the terms of the GNU General Public License as published by
 #the Free Software Foundation, either version 3 of the License, or
@@ -14,8 +15,9 @@
 
 #You should have received a copy of the GNU General Public License
 #along with this program.  If not, see <http://www.gnu.org/licenses/>.
+u=$1;
+p=$2;
+d=$3;
+c=$4;
+mysql --user=$u --password=$p --database=$d -B -N -e "SHOW TABLES" | awk '{print "SET foreign_key_checks = 0; ALTER TABLE", $1, "CONVERT TO CHARACTER SET utf8 COLLATE '$c'; SET foreign_key_checks = 1; "}' | mysql --user=$u --password=$p --database=$d &
 
-if [ -f $2 ]; then
-sed -i -e "1i$1\\" $2
-
-fi
