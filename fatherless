@@ -1,4 +1,4 @@
 #!/bin/bash
 parent=$1;
 pa=`readlink -f $parent/..`;
-mv `readlink -f $parent`/* $pa && rmdir $parent;
+mv `readlink -f $parent` $pa && rmdir $parent;
