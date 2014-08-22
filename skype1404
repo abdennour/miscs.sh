@@ -1,0 +1,25 @@
+#!/bin/bash
+
+#@uthor Abdennour عبد النور
+# Script Shell to INSTALL Skype 4.3 under unbuntu . IT resolves "Skype can't connect"
+#Copyright (c) 2014
+
+
+
+cd ~ && rm -r .Skype    
+sudo apt-get remove skype skype-bin:i386 skype:i386
+sudo apt-get install sni-qt:i386
+
+
+ARCH=`uname -i`;
+
+if [ $ARCH = "x86_64" ]
+then 
+  sudo dpkg --add-architecture i386
+fi 
+
+
+sudo apt-get update
+sudo apt-get install gdebi
+wget download.skype.com/linux/skype-ubuntu-precise_4.3.0.37-1_i386.deb
+sudo gdebi skype-ubuntu-precise_4.3.0.37-1_i386.deb
